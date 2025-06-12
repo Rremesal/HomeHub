@@ -21,7 +21,7 @@ module.exports = {
       radius: {
         small: 5,
         medium: 7,
-        large: 10
+        large: 10,
       },
       navbarHeight: 16,
 
