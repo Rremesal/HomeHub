@@ -1,19 +1,33 @@
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 
 // Core
 import { loginValidation } from "./_validations";
-import Input from "../input";
 import { Button } from "@heroui/button";
+import { Alert } from "@heroui/alert";
+import Input from "../input";
+
+// Hooks
+import useAuth from "@/hooks/auth";
+
 
 function LoginForm() {
-  const { control, handleSubmit, formState: { errors }} = useForm({
+  const { control, handleSubmit, setError, formState: { errors }} = useForm({
     resolver: yupResolver(loginValidation),
     mode: "onChange"
   });
 
+  const { login } = useAuth();
+  const router = useRouter();
+
   const handleFormSubmit = async values => {
-    console.log(values);
+    try {
+      await login(values);
+      router.replace("/");
+    } catch (error) {
+      setError("submit", {message: error.message});
+    }
   }
 
 
@@ -33,10 +47,12 @@ function LoginForm() {
       />
 
       <div className="text-end">
-        <Button color="primary" type="submit">
+        <Button radius="md" color="primary" type="submit">
           Login
         </Button>
       </div>
+
+      { errors.submit && <Alert color="danger" title={errors.submit.message} /> }
     </form>
   )
 }

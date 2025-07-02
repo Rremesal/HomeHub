@@ -1,9 +1,10 @@
-import { Button } from "@heroui/button";
+import useAuth from "@/hooks/auth";
 
 function HomePage() {
+  const { currentUser } = useAuth();
   return (
     <div>
-      <Button color="warning">test</Button>
+      <pre>{JSON.stringify(currentUser, null, 2)}</pre>
     </div>
   )
 }

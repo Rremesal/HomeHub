@@ -9,12 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroui/alert": "^2.2.22",
+    "@heroui/avatar": "^2.2.18",
     "@heroui/button": "^2.2.21",
     "@heroui/card": "^2.2.20",
     "@heroui/input": "^2.4.21",
+    "@heroui/link": "^2.2.19",
+    "@heroui/popover": "^2.3.22",
     "@heroui/system": "^2.4.17",
     "@heroui/theme": "^2.4.17",
     "@hookform/resolvers": "^5.1.1",
+    "@tanstack/react-query": "^5.80.10",
     "framer-motion": "^12.18.1",
     "next": "15.3.4",
     "react": "^19.0.0",
