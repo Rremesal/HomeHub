@@ -3,11 +3,12 @@ import { Fragment } from "react";
 // Core
 import { Button } from "@heroui/button";
 import { Avatar } from "@heroui/avatar";
+import { Link } from "@heroui/link";
 import Popover from "./popover";
+import ThemeSwitch from "./theme_switch";
 
 // Hooks
 import useAuth from "@/hooks/auth";
-import { Link } from "@heroui/link";
 
 function Navbar() {
   const { currentUser, logout } = useAuth();
@@ -20,10 +21,13 @@ function Navbar() {
         <Popover 
           trigger={<Avatar />}
         >
-          <ul>
-            <li>{currentUser?.fullName}</li>
+          <ul className="flex flex-col gap-1">
+            <li className="text-foreground">{currentUser?.fullName}</li>
             <li>
-              <Button fullWidth color="danger" onPress={logout}>Logout</Button>
+              <ThemeSwitch />
+            </li>
+            <li>
+              <Button size="sm" fullWidth color="danger" onPress={logout}>Logout</Button>
             </li>
           </ul>
         </Popover>

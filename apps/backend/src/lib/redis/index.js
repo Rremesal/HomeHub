@@ -38,7 +38,12 @@ class RedisClient {
    * 
    */
   deleteSession = async (sessionToken) => {
-    return await this.connection.del(`session:${sessionToken}`);
+    try {
+      const test = this.connection.del(`session:${sessionToken}`);
+      return test;
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 

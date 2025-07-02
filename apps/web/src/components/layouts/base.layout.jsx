@@ -17,7 +17,7 @@ function BaseLayout(props) {
     <Fragment>
       { !router.asPath.includes(PUBLIC_ROUTES.login) && <Navbar />}
 
-      <main className="flex">
+      <main className="flex flex-col bg-background h-screen">
         {children}
       </main>
     </Fragment>

@@ -9,6 +9,7 @@ module.exports = {
   theme: {
     extend: {},
   },
+  darkMode: "class",
   plugins: [heroui({
     layout: {
       radius: {
@@ -25,7 +26,8 @@ module.exports = {
             DEFAULT: "#2494C5",
             foreground: "#272E35",
             "500": "#FFFFFF"
-          }
+          },
+          selected: "#ABF1FF"
         }
       },
       dark: {
@@ -33,11 +35,14 @@ module.exports = {
           background: "#272E35",
           primary: {
             DEFAULT: "#2494C5",
-            foreground: "#E2F1FA"
-          }
+            foreground: "#E2F1FA",
+            "500": "#11141A"
+          },
+          selected: "#202530"
         }
       }
     }
+    
   })],
 }
 
