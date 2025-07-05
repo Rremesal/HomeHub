@@ -34,11 +34,12 @@ function AuthProvider(props) {
   });
 
   useEffect(() => {
-    if (!router.asPath.includes(PUBLIC_ROUTES.login)) {
-      refetch();
-      setCurrentUser(me)
-    }
-  }, [me, refetch, router])
+    refetch();
+  }, [refetch]);
+
+  useEffect(() => {
+    if (me) setCurrentUser(me)
+  }, [me])
 
   const login = async (formData) => {
     try {

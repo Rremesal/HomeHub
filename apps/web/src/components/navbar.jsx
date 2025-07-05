@@ -16,7 +16,11 @@ function Navbar() {
   return (
     <Fragment>
       <nav className="h-[52px] bg-primary-500 flex items-center justify-between px-2">
-        <Link isBlock href="#">Home</Link>
+        <div className="flex gap-1">
+          <Link isBlock href="#">Home</Link>
+
+          <Link isBlock href="/users">User management</Link>
+        </div>
         
         <Popover 
           trigger={<Avatar />}
@@ -32,8 +36,6 @@ function Navbar() {
           </ul>
         </Popover>
       </nav>
-
-
     </Fragment>
   )
 }

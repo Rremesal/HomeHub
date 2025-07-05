@@ -10,13 +10,13 @@ function MasterProvider(props) {
 
   return (
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider>
-          <HeroUIProvider>
-              <AuthProvider>
-                {children}
-              </AuthProvider>
-          </HeroUIProvider>
-        </ThemeProvider>
+          <ThemeProvider>
+            <HeroUIProvider>
+                <AuthProvider>
+                  {children}
+                </AuthProvider>
+            </HeroUIProvider>
+          </ThemeProvider>
       </QueryClientProvider>
   )
 }

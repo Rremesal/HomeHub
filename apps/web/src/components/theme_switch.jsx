@@ -13,7 +13,7 @@ function ThemeSwitch() {
       <Button
         variant="ghost"
         onPress={() => changeTheme("light")}
-        startContent={<Icon name="sun"/>}
+        startContent={<Icon className="size-5" name="sun"/>}
         className={`${theme === "light" && "bg-selected"}`}
       >
         Light
@@ -22,7 +22,7 @@ function ThemeSwitch() {
       <Button
         variant="ghost"
         onPress={() => changeTheme("dark")}
-        startContent={<Icon name="moon" />}
+        startContent={<Icon className="size-5" name="moon" />}
         className={`${theme === "dark" && "bg-selected"}`}
       >
         Dark

@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import crypto from "crypto";
 
 // Core
-import { loginValidation } from "../_validations.js";
+import { createUserValidation, loginValidation } from "../_validations.js";
 import User from "../lib/mongoose/schemas/user.schema.js";
 import RedisClient from "../lib/redis/index.js";
 import errors from "../utils/errors.js";
@@ -22,6 +22,8 @@ class UserController {
 
       const isPasswordValid = await bcrypt.compare(data.password, user.password);
 
+      console.log("isPasswordValid", isPasswordValid);
+
       if (!isPasswordValid) return res.status(500).json(errors.SOMETHING_WENT_WRONG);
 
       const sessionToken = crypto.randomBytes(16).toString("hex");
@@ -30,10 +32,28 @@ class UserController {
 
       res.cookie("sid", sessionToken, { maxAge: 30 * 60 * 1000 });
 
+      await User.updateOne({ _id: user._id }, { last_logged_in_at: new Date()})
+
       return res.status(200).json(true);
 
     } catch (error) {
       console.log(error);
+      return res.status(500).json(errors.SOMETHING_WENT_WRONG);
+    }
+  }
+
+  async create(req, res) {
+    try {
+      const data = await createUserValidation.validate(req.body);
+
+      const user = await User.create(data);
+
+      console.log(user);
+
+      return res.status(201).json(user);
+
+    } catch (error) {
+      console.log(error)
       return res.status(500).json(errors.SOMETHING_WENT_WRONG);
     }
   }
@@ -58,6 +78,41 @@ class UserController {
       const user = await User.findOne({ _id: session.userId});
 
       return res.status(200).json(user);
+    } catch (error) {
+      return res.status(500).json(errors.SOMETHING_WENT_WRONG);
+    }
+  }
+
+  async index(req, res) {
+    const { id, ...params } = req.query;
+
+    const whereObject = {};
+    if (params.s) whereObject.push({ firstName: { $regex: params.s, $options: "i" } })
+    let users;
+
+    try {
+      if (id) {
+        users = await User.findOne({ _id: id});
+        return res.status(200).json(users);
+      }
+
+      users = await User.find(whereObject);
+      return res.status(200).json(users);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  }
+
+  async delete(req, res) {
+    const { sid } = req.cookies;
+    const { id } = req.params;
+
+    console.log(id)
+
+    try {
+      const deleted = await User.deleteOne({ _id: id});
+      if (!deleted.deletedCount) return res.status(500).json(errors.SOMETHING_WENT_WRONG)
+      return res.status(200).json(true);
     } catch (error) {
       return res.status(500).json(errors.SOMETHING_WENT_WRONG);
     }
