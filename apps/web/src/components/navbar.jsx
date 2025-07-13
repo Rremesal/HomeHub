@@ -20,6 +20,8 @@ function Navbar() {
           <Link isBlock href="#">Home</Link>
 
           <Link isBlock href="/users">User management</Link>
+
+          <Link isBlock href="/sonos">Sonos</Link>
         </div>
         
         <Popover 

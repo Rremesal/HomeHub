@@ -1,5 +1,5 @@
 // Icons
-import { SunIcon, MoonIcon, EllipsisHorizontalIcon, MagnifyingGlassIcon, PlusIcon } from "@heroicons/react/24/outline"
+import { SunIcon, MoonIcon, EllipsisHorizontalIcon, MagnifyingGlassIcon, PlusIcon, PlayIcon, PauseIcon } from "@heroicons/react/24/outline"
 
 
 function Icon(props) {
@@ -11,6 +11,8 @@ function Icon(props) {
     elipsisHorizontal: EllipsisHorizontalIcon,
     magnifyingGlass: MagnifyingGlassIcon,
     plus: PlusIcon,
+    play: PlayIcon,
+    pause: PauseIcon
   }
 
   const DynamicIcon = supported_icons[name];

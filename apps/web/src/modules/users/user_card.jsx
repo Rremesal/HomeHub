@@ -30,9 +30,7 @@ function UserCard(props) {
             <li>
               <Button fullWidth size="sm" variant="light">Edit</Button>
             </li>
-            <li>
-              <Button fullWidth size="sm" variant="light">Reset password</Button>
-            </li>
+
             <li>
               <Button onPress={onDelete} fullWidth size="sm" color="danger" variant="light">Delete</Button>
             </li>
