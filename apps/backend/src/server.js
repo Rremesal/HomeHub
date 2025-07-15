@@ -6,7 +6,6 @@ import cors from "cors";
 // Core
 import "./lib/mongoose/index.js";
 import userRouter from "./routers/user.router.js";
-import sonosRouter from "./routers/sonos.router.js";
 
 config();
 
@@ -20,7 +19,6 @@ app.use(express.json());
 app.use(cookieParser())
 
 app.use("/", userRouter);
-app.use("/", sonosRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`[BACKEND] Listening on http://localhost:${process.env.PORT}`)
